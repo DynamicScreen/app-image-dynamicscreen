@@ -1,0 +1,6 @@
+{
+  "app": {
+    "name": "Application Message",
+    "description": "Afficher de beaux message, comme des camions."
+  }
+}
