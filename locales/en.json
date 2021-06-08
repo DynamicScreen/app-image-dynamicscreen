@@ -1,6 +1,24 @@
 {
-  "app": {
-    "name": "App Message",
-    "description": "Display beautiful message, as trucks are"
-  }
+    "app": {
+        "name": "Image",
+        "description": "Display an image.",
+        "author": {
+            "name": "DynamicScreen",
+            "email": "bonjour@dynamicscreen.com",
+            "note": "Use wide landscapes as wallpapers."
+        }
+    },
+    "privileges": {
+        "needs_account": {
+            "google": {
+                "why": "This privilege is required to access your drive"
+            }
+        }
+    },
+    "modules": {
+        "simple_message": {
+            "name": "Image",
+            "description": "Display an image, very simple."
+        }
+    }
 }

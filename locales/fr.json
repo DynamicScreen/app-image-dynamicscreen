@@ -1,6 +1,24 @@
 {
-  "app": {
-    "name": "Application Message",
-    "description": "Afficher de beaux message, comme des camions."
-  }
+    "app": {
+        "name": "Image",
+        "description": "Affiche une ou plusieurs images.",
+        "author": {
+            "name": "DynamicScreen",
+            "email": "bonjour@dynamicscreen.com",
+            "note": "Les grands paysages désertiques font toujours impressionnants."
+        }
+    },
+    "privileges": {
+        "needs_account": {
+            "google": {
+                "why": "Cette authorisation est nécessaire afin d'accéder aux images sur votre drive."
+            }
+        }
+    },
+    "modules": {
+        "image": {
+            "name": "Message simple",
+            "description": "Affiche une image, tous simplement !"
+        }
+    }
 }

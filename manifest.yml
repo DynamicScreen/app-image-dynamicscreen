@@ -1,36 +1,27 @@
 # YAML
-id: dynamicscreen.message2
+id: dynamicscreen.image
 name: app.name
-description: Display basic or advanced messages.
-version: 0.1.0-beta
+description: app.description
+version: 0.2.0-beta
 api-level: 1
 author:
   name: DynamicScreen
   email: bonjour@dynamicscreen.com
+  note: author.note
 privileges:
   needs_account:
     - type: google
-      why: Please give it and do not try to understand
+      why: privileges.needs_account.google.why
     - type: microsoft
-      why: Microsoft for life
+      why: privileges.needs_account.microsoft.why
 modules:
-  - name: Simple Message
+  - name: modules.image.name
     type: slide
-    description: Display basic message with title and description
+    description: modules.image.description
     vue:
-      component: src/SimpleMessage.vue
-      options: src/SimpleMessageOptions.vue
+      component: src/Image.vue
+      options: src/ImageOptions.vue
     php:
-      handler: Vendor\DynamicScreenMessage\MessageHandler
-    node:
-      handler: src/handler.js
-  - name: Advanced message
-    type: slide
-    description: Display advanced customizable message
-    vue:
-      component: src/AdvancedMessage.vue
-      options: src/AvancedMessageOptions.vue
-    php:
-      handler: Vendor\DynamicScreenMessage\MessageHandler
+      handler: Vendor\DynamicScreenImage\ImageHandler
     node:
       handler: src/handler.js
