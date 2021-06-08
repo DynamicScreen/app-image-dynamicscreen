@@ -34,15 +34,15 @@
             //URL.revokeObjectURL(this.url);
         },
         computed: {
+            slide() {
+              return this.context.slide;
+            },
             hasMargins() {
                 return this.slide.data.margin === "1"
             },
             media() {
                 return this.slide.data.media
             },
-            slide() {
-              return this.context.slide[0];
-            }
         },
         methods: {
             initMedia() {
