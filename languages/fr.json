@@ -17,7 +17,7 @@
     },
     "modules": {
         "image": {
-            "name": "Message simple",
+            "name": "Image",
             "description": "Affiche une image, tous simplement !"
         }
     }

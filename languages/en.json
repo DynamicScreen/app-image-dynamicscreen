@@ -16,7 +16,7 @@
         }
     },
     "modules": {
-        "simple_message": {
+        "image": {
             "name": "Image",
             "description": "Display an image, very simple."
         }
