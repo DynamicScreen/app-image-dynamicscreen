@@ -4,8 +4,8 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   mode: "development",
   entry: {
-    SimpleMessage: path.resolve(__dirname, './src/Image.vue'),
-    SimpleMessageOptions: path.resolve(__dirname, './src/ImageOptions.vue'),
+    Image: path.resolve(__dirname, './src/Image.vue'),
+    ImageOptions: path.resolve(__dirname, './src/ImageOptions.vue'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),

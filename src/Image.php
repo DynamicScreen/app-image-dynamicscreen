@@ -6,7 +6,7 @@ namespace Vendor\MyApp;
 use DynamicScreen\SdkPhp\Slide\SlideHandler;
 use DynamicScreen\SdkPhp\Slide\ISlide;
 
-class Message extends SlideHandler {
+class Image extends SlideHandler {
 
     public function fetch(ISlide $slide): array
     {

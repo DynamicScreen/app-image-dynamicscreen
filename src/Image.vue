@@ -2,7 +2,8 @@
     <div class="container" v-if="url">
         <slide-title v-if="slide.show_title" :slide="slide"></slide-title>
         <div class="slide-content center vertical-center-wrapper flex-column">
-            <div class="image-container" :class="{ marginImg: hasMargins}" :style="{ backgroundImage: 'url(\'' + url + '\')', backgroundColor: slide.data.color}"></div>
+<!--          <div class="image-container" :class="{ marginImg: hasMargins}" :style="{ backgroundImage: 'url(\'' + url + '\')', backgroundColor: slide.data.color}"></div>-->
+          <div class="image-container" :class="{ marginImg: hasMargins}" :style="{ backgroundImage: 'url(\'' + url + '\')', backgroundColor: slide.data.color}"></div>
             <p class="caption" v-if="slide.data.caption" :style="{ backgroundColor: slide.data.color, color: slide.data.caption_color}">{{ slide.data.caption }}</p>
         </div>
     </div>
@@ -34,13 +35,13 @@
     }
 </style>
 <script>
-    import {instDatabase} from "database";
-    import {instMediaManager} from "mediaManager";
-    import {CHROME_APP} from "../js/helpers"
-    import {findMedias} from "utils/functions";
+    // import {instDatabase} from "database";
+    // import {instMediaManager} from "mediaManager";
+    // import {CHROME_APP} from "../js/helpers"
+    // import {findMedias} from "utils/functions";
 
     export default {
-        props: ['slide', 'interactive'],
+        props: { context: {type: Object} },
         data() {
             return {
                 url: null,
@@ -63,26 +64,29 @@
             },
             media() {
                 return this.slide.data.media
+            },
+            slide() {
+              return this.context.slide[0];
             }
         },
         methods: {
             initMedia() {
-                if (!this.media.cachedUrl) {
-                    this.loadAsset(this.media.id);
-                } else {
-                    instMediaManager.lastUseMediaUpdating(this.media.id)
-                }
-                this.url = this.media.cachedUrl || this.media.url
+                // if (!this.media.cachedUrl) {
+                //     this.loadAsset(this.media.id);
+                // } else {
+                //     instMediaManager.lastUseMediaUpdating(this.media.id)
+                // }
+                this.url = this.media.url;
             },
-            loadAsset(id) {
-                window.$host.retrieveAsset(id).then((media) => {
-                        this.media.cachedUrl = media.blob
-                        this.url = media.blob
-                        instMediaManager.lastUseMediaUpdating(media.data.mediaId)
-                }).catch((err) => {
-                    window.$logger.log("Slides Essentials: Image: Can\'t retrieve asset: " + err, false)
-                });
-            },
+            // loadAsset(id) {
+            //     window.$host.retrieveAsset(id).then((media) => {
+            //             this.media.cachedUrl = media.blob
+            //             this.url = media.blob
+            //             instMediaManager.lastUseMediaUpdating(media.data.mediaId)
+            //     }).catch((err) => {
+            //         window.$logger.log("Slides Essentials: Image: Can\'t retrieve asset: " + err, false)
+            //     });
+            // },
         },
     }
 </script>
