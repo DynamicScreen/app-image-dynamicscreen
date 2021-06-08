@@ -67,5 +67,28 @@
 </script>
 
 <style scoped>
+  .container {
+    background: white;
+  }
+  .center {
+    text-align: center;
+  }
 
+  .caption {
+    margin: 0;
+    padding: 1em .5em;
+    font-size: 1em;
+    font-weight: 300;
+  }
+
+  .marginImg {
+    margin: 0.7em;
+  }
+
+  .image-container {
+    flex: 1;
+    background: no-repeat center center;
+    -webkit-background-size: contain;
+    background-size: contain;
+  }
 </style>

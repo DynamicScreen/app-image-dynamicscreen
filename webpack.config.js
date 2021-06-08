@@ -27,6 +27,10 @@ module.exports = {
           appendTsSuffixTo: [/\.vue$/],
         }
       },
+      {
+        test: /\.css$/,
+        loader: 'css-loader'
+      }
     ]
   },
   resolve: {
