@@ -1,37 +1,31 @@
 <template>
     <div class="container" v-if="url">
-        <slide-title v-if="slide.show_title" :slide="slide"></slide-title>
         <div class="slide-content center vertical-center-wrapper flex-column">
-<!--          <div class="image-container" :class="{ marginImg: hasMargins}" :style="{ backgroundImage: 'url(\'' + url + '\')', backgroundColor: slide.data.color}"></div>-->
           <div class="image-container" :class="{ marginImg: hasMargins}" :style="{ backgroundImage: 'url(\'' + url + '\')', backgroundColor: slide.data.color}"></div>
-            <p class="caption" v-if="slide.data.caption" :style="{ backgroundColor: slide.data.color, color: slide.data.caption_color}">{{ slide.data.caption }}</p>
+          <p class="caption" v-if="slide.data.caption" :style="{ backgroundColor: slide.data.color, color: slide.data.caption_color}">{{ slide.data.caption }}</p>
+          <p class="caption">{{ trans('app.description') }}</p>
         </div>
     </div>
 </template>
 
 <script>
-    // import {instDatabase} from "database";
-    // import {instMediaManager} from "mediaManager";
-    // import {CHROME_APP} from "../js/helpers"
-    // import {findMedias} from "utils/functions";
+    import i18next from "i18next";
+    import en from "../../../storage/apps/dynamicscreen.image/0.2.0-beta/languages/en.json";
+    import fr from "../../../storage/apps/dynamicscreen.image/0.2.0-beta/languages/fr.json";
 
     export default {
         props: { context: {type: Object} },
         data() {
             return {
                 url: null,
-                db: null,
-                imgHTML: ""
             }
         },
         mounted() {
+          this.initI18n();
             this.initMedia();
         },
         activated() {
             this.initMedia();
-        },
-        deactivated() {
-            //URL.revokeObjectURL(this.url);
         },
         computed: {
             slide() {
@@ -45,23 +39,29 @@
             },
         },
         methods: {
+          initI18n() {
+            i18next.init({
+              fallbackLng: 'en',
+              lng: 'fr',
+              resources: {
+                en: { translation: en },
+                fr: { translation: fr },
+              },
+              debug: true,
+              ns: {
+                namespaces: ['translation'],
+                defaultNs: 'translation'
+              }
+            }, (err, t) => {
+              if (err) return console.log('something went wrong loading translations', err);
+            });
+          },
+          trans(key) {
+            return i18next.t(key);
+          },
             initMedia() {
-                // if (!this.media.cachedUrl) {
-                //     this.loadAsset(this.media.id);
-                // } else {
-                //     instMediaManager.lastUseMediaUpdating(this.media.id)
-                // }
                 this.url = this.media.url;
             },
-            // loadAsset(id) {
-            //     window.$host.retrieveAsset(id).then((media) => {
-            //             this.media.cachedUrl = media.blob
-            //             this.url = media.blob
-            //             instMediaManager.lastUseMediaUpdating(media.data.mediaId)
-            //     }).catch((err) => {
-            //         window.$logger.log("Slides Essentials: Image: Can\'t retrieve asset: " + err, false)
-            //     });
-            // },
         },
     }
 </script>
@@ -69,7 +69,15 @@
 <style scoped>
   .container {
     background: white;
+    height: 100%;
+    width: 100%;
   }
+
+  .slide-content {
+    height: 100%;
+    width: 100%;
+  }
+
   .center {
     text-align: center;
   }
@@ -86,6 +94,8 @@
   }
 
   .image-container {
+    width: 100%;
+    height: 100%;
     flex: 1;
     background: no-repeat center center;
     -webkit-background-size: contain;
