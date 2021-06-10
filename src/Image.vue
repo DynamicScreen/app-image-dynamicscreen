@@ -10,8 +10,8 @@
 
 <script>
     import i18next from "i18next";
-    import en from "../../../storage/apps/dynamicscreen.image/0.2.0-beta/languages/en.json";
-    import fr from "../../../storage/apps/dynamicscreen.image/0.2.0-beta/languages/fr.json";
+    import en from "./../languages/en.json";
+    import fr from "./../languages/fr.json";
 
     export default {
         props: { context: {type: Object} },
