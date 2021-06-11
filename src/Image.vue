@@ -9,11 +9,13 @@
 </template>
 
 <script>
-    import i18next from "i18next";
-    import en from "./../languages/en.json";
-    import fr from "./../languages/fr.json";
+import {defineComponent} from "vue";
+  import i18next from "i18next";
+  import en from "./../languages/en.json";
+  import fr from "./../languages/fr.json";
 
-    export default {
+    export default defineComponent({
+      name: "Image",
         props: { context: {type: Object} },
         data() {
             return {
