@@ -65,7 +65,7 @@ import {defineComponent} from "vue";
                 this.url = this.media.url;
             },
         },
-    }
+    })
 </script>
 
 <style scoped>
