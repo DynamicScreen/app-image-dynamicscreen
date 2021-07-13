@@ -2,6 +2,7 @@
     "app": {
         "name": "Image",
         "description": "Display an image.",
+        "logo": "fa fa-image",
         "author": {
             "name": "DynamicScreen",
             "email": "bonjour@dynamicscreen.com",
