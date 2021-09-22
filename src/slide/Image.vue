@@ -12,7 +12,7 @@
 
 <script lang="ts">
 
-import {IPublicSlide} from "../../../../../../../dynamicscreen-sdk-js/dist";
+// import {IPublicSlide} from "../../../../../../../dynamicscreen-sdk-js/dist";
 
 interface ISlideContext extends BaseContext {
   guardManager: IGuardsManager;
@@ -26,7 +26,7 @@ interface ISlideContext extends BaseContext {
 
 import {defineComponent, computed, onMounted, PropType, reactive, getCurrentInstance, ref} from "vue";
 import i18next from "i18next";
-import { ISlide, IAssetsStorageAbility, IGuardsManager, BaseContext } from "dynamicscreen-sdk-js";
+import { ISlide, IAssetsStorageAbility, IGuardsManager, BaseContext, IPublicSlide } from "dynamicscreen-sdk-js";
 const en = require("../../languages/en.json");
 const fr = require("../../languages/fr.json");
 

@@ -16,7 +16,7 @@ const webpack = require('webpack')
             path: path.resolve(__dirname, './dist'),
             publicPath: '/dist/',
             filename: '[name].js',
-            library: ['dynamicscreen.image::0.0.2'],
+            library: ['dynamicscreen.image::0.2.0'],
             libraryTarget: 'window',
           },
           module: {
