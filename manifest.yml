@@ -12,10 +12,10 @@ author:
   note: author.note
 privileges:
     needs_account:
-        -   name: google1
+        -   identifier: google1
             type: google
             why: privileges.needs_account.google.why
-        -   name: microsoft1
+        -   identifier: microsoft1
             type: microsoft
             why: privileges.needs_account.microsoft.why
 modules:
