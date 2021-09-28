@@ -6,7 +6,7 @@ import {
   ISlideContext,
   IPublicSlide,
   SlideModule
-} from "../../../../../../../dynamicscreen-sdk-js/src";
+} from "dynamicscreen-sdk-js"
 
 import { VNode, ComponentPublicInstance } from 'vue';
 import i18next from "i18next";

@@ -11,17 +11,20 @@ author:
   email: bonjour@dynamicscreen.com
   note: author.note
 privileges:
-  needs_account:
-    - type: google
-      why: privileges.needs_account.google.why
-    - type: microsoft
-      why: privileges.needs_account.microsoft.why
+    needs_account:
+        -   name: google1
+            type: google
+            why: privileges.needs_account.google.why
+        -   name: microsoft1
+            type: microsoft
+            why: privileges.needs_account.microsoft.why
 modules:
   - name: modules.image.name
+    identifier: image
     type: slide
     description: modules.image.description
     vue:
-      component: src/slide/Module.ts
+      component: src/slide/Image.ts
       options: src/ImageOptions.vue
     php:
       handler: Vendor\DynamicScreenImage\ImageHandler
