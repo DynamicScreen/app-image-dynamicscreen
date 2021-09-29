@@ -24,13 +24,10 @@ export default class ImageSlideModule extends SlideModule {
   };
 
   async onReady() {
-    console.log('Image working to be ready...')
-
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
       await ability.download(this.context.slide.data.url, (assetDownload: AssetDownload) => {
         assetDownload.onProgress.subscribe((progress, ev) => {
-          console.log('progress: ',  progress);
           ev.unsub();
         });
 
@@ -41,18 +38,15 @@ export default class ImageSlideModule extends SlideModule {
       });
     });
 
-    console.log('Image IS ready...')
-
     // guard.remove();
     return true;
   };
 
   onMounted() {
-    console.log('Image: onMounted')
+    console.log('SYNCED')
   }
 
   onUpdated() {
-    console.log('Image: onUpdated')
   }
 
   initI18n() {
@@ -80,7 +74,6 @@ export default class ImageSlideModule extends SlideModule {
     const urlBg = computed(() => 'url(\'' + url.value + '\')')
 
     context.onPrepare(async () => {
-      console.log('Image: onPrepare');
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
@@ -88,11 +81,9 @@ export default class ImageSlideModule extends SlideModule {
     });
 
     context.onReplay(async () => {
-      console.log('Image: onReplay')
     });
 
     context.onPlay(async () => {
-      console.log('Image: onPlay')
     });
 
     // context.onPause(async () => {
@@ -100,19 +91,12 @@ export default class ImageSlideModule extends SlideModule {
     // });
 
     context.onEnded(async () => {
-      console.log('Image: onEnded')
     });
 
     return () => h("div", {
       class: "container"
     }, [
       h("div", {}, [
-        h("p", {
-          class: "a"
-        }, this.trans('app.name')),
-        h("p", {
-          class: "b"
-        }, this.trans('modules.image.description')),
         h("div", {
           class: "slide-content center vertical-center-wrapper flex-column"
         }, [
