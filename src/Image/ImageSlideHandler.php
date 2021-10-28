@@ -17,86 +17,75 @@ class ImageSlideHandler extends SlideHandler
 
     public function fetch(ISlide $slide): array
     {
-        // TODO: parse options using priv identifier
+        $mediaAccessKey = $this->needed_medias();
 
-        $options = $slide->getOptions();
-        if (isset($options['media'])) {
-            $medias = $options['media'];
-
-//            $medias->each(function ($media) use ($slide) {
-//                if ($media->isExpired || !$media->metadata("transcoded", true)) {
-//                    return;
-//                }
-//
-//                $this->slide([
-//                    'media'         => $media,
-//                    'size'          => $media->size,
-//                    'url'           => $media->url,
-//                    'hash'          => $media->hash,
-//                    'color'         => $slide->getOption('color'),
-//                    'media_id'      => $media->id,
-//                    'margin'        => $slide->getOption('margin'),
-//                    'caption'       => $slide->getOption('caption'),
-//                    'caption_color' => rescue(function () use ($slide) {
-//                        return getContrastColor($slide->getOption('color'));
-//                    }, 'black'),
-//                ]);
-//            });
+        if (is_array($mediaAccessKey)) {
+            $mediasAccessKey = Arr::first($mediaAccessKey);
         }
 
-        return $options;
-    }
+        $medias = $slide->getOption($mediaAccessKey);
 
-    public function processOptions($options)
-    {
-        /** @var Request $request */
-        $request = app('request');
-        if ($request->has('media')) {
-            $options['media'] = $request->get('media');
-            return $options;
+        if (!$medias) {
+            return [];
         }
 
-        if ($request->hasFile('options.image')) {
-//            $options['image'] = $this->getExtension()->uploadFile('image', 'images');
-//            $options['hash'] = $this->generateHash($request->file('options.image')->path());
-            return $options;
+        return $medias->map(function ($media) use ($slide) {
+            return [
+                'media' => $media,
+                'size' => Arr::get($media, 'size'),
+                'url' => Arr::get($media, 'url'),
+                'hash' => Arr::get($media, 'hash'),
+                'color' => $slide->getOption('color', 'black'),
+                'media_id' => Arr::get($media, 'id'),
+                'margin' => $slide->getOption('margin', '0'),
+                'caption' => $slide->getOption('caption', ''),
+                'caption_color' => rescue(function () use ($slide) {
+                    return $this->getContrastColor($slide->getOption('color'));
+                }, 'black'),
+            ];
+        });
+    }
+
+    public function needed_medias()
+    {
+        return $this->module->getOption('privileges.needs_media', false);
+    }
+
+    function getContrastColor($hexColor)
+    {
+
+        //////////// hexColor RGB
+        $R1 = hexdec(substr($hexColor, 0, 2));
+        $G1 = hexdec(substr($hexColor, 2, 2));
+        $B1 = hexdec(substr($hexColor, 4, 2));
+
+        //////////// Black RGB
+        $blackColor = "#000000";
+        $R2BlackColor = hexdec(substr($blackColor, 0, 2));
+        $G2BlackColor = hexdec(substr($blackColor, 2, 2));
+        $B2BlackColor = hexdec(substr($blackColor, 4, 2));
+
+        //////////// Calc contrast ratio
+        $L1 = 0.2126 * pow($R1 / 255, 2.2) +
+            0.7152 * pow($G1 / 255, 2.2) +
+            0.0722 * pow($B1 / 255, 2.2);
+
+        $L2 = 0.2126 * pow($R2BlackColor / 255, 2.2) +
+            0.7152 * pow($G2BlackColor / 255, 2.2) +
+            0.0722 * pow($B2BlackColor / 255, 2.2);
+
+        $contrastRatio = 0;
+        if ($L1 > $L2) {
+            $contrastRatio = (int) (($L1 + 0.05) / ($L2 + 0.05));
+        } else {
+            $contrastRatio = (int) (($L2 + 0.05) / ($L1 + 0.05));
         }
 
-        return $options;
-    }
-
-    public function getAttachedMedias(ISlide $slide)
-    {
-        $media = $slide->getOption('media');
-        return $media === null ? [] : [$media];
-    }
-
-    public function getValidations(Request $request = null)
-    {
-        $media_rules = ['required_if:options.type,media', 'array'];
-
-        $options = $request->get('options');
-//        if ($request && Arr::get($options, 'type') === 'media') {
-//            $media_rules[] = new AreAvailable;
-//        }
-
-        return [
-            'rules' => [
-                'media' => $media_rules,
-                'remote_file_id' => ['required_if:options.type,drive']
-            ],
-            'messages' => [
-                'media.required_if' => __('dynamicscreen.slides-essentials::image.validations.media_required'),
-            ],
-        ];
-    }
-
-    public function getDefaultOptions(): array
-    {
-        return [
-            'title' => '',
-            'message' => '',
-            'backgroundColor' => '#D42500',
-        ];
+        //////////// If contrast is more than 5, return black color
+        if ($contrastRatio > 5) {
+            return 'black';
+        } else { //////////// if not, return white color.
+            return 'white';
+        }
     }
 }
