@@ -1,6 +1,32 @@
 {
-    "name": "app-image",
-    "version": "1.0.0",
-    "dependencies": {
-    }
+  "name": "app-image-dynamicscreen",
+  "version": "0.2.0",
+  "description": "Image app for DynamicScreen SaaS",
+  "main": "webpack.config.js",
+  "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DynamicScreen",
+  "license": "MIT",
+  "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cormarti/app-image-dynamicscreen.git"
+  },
+  "dependencies": {
+    "dynamicscreen-sdk-js": "^0.0.18",
+    "i18next": "^20.4.0",
+    "webpack": "^5.50.0"
+  },
+  "peerDependencies": {
+      "vue": "^3.2.11"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.1",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.3"
+  },
+  "bugs": {
+    "url": "https://github.com/cormarti/app-image-dynamicscreen/issues"
+  },
+  "homepage": "https://github.com/cormarti/app-image-dynamicscreen#readme"
 }
