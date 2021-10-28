@@ -361,10 +361,10 @@ csstype@^2.6.8:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.18.tgz#980a8b53085f34af313410af064f2bd241784218"
   integrity sha512-RSU6Hyeg14am3Ah4VZEmeX8H7kLwEEirXe6aU2IPfKNvhXwTflK5HQRDNI0ypQXoqmm+QPyG2IaPuQE5zMwSIQ==
 
-dynamicscreen-sdk-js@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/dynamicscreen-sdk-js/-/dynamicscreen-sdk-js-0.0.18.tgz#9e0d7134dcac89ed4d92c85c7fe14019c314986b"
-  integrity sha512-4dHQaIPCLQAkecZM1LYiKEcl8LKT6icxC7ix7LqtrSYlAsikcuo6M8Q+7jCa62/Uewdrfm+I21kfUUsxiT0b3Q==
+dynamicscreen-sdk-js@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/dynamicscreen-sdk-js/-/dynamicscreen-sdk-js-0.0.19.tgz#7aa78e03c45a5af5e2f56daa2e45a3f3c96c1d0f"
+  integrity sha512-ZWVYgMnLHY1fh/8mkcwaaF9Y9dLruJqXtk8GU5RNjhir9XByyeGjNYkQV6v2y44mUfqPhz+4TzcYL96+DLfM6A==
   dependencies:
     strongly-typed-events "^2.1.10"
     typescript "^4.3.5"
