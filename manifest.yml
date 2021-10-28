@@ -25,10 +25,10 @@ modules:
       privileges:
         needs_media:
           - image-medias
-        vue:
-          component: src/Image/Image.ts
-          options: src/Image/ImageOptions.ts
-        php:
-          handler: \DynamicScreen\Image\Image\ImageSlideHandler
-        node:
-          handler: src/handler.js
+      vue:
+        component: src/Image/Image.ts
+        options: src/Image/ImageOptions.ts
+      php:
+        handler: \DynamicScreen\Image\Image\ImageSlideHandler
+      node:
+        handler: src/handler.js
