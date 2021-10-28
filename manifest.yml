@@ -5,25 +5,29 @@ description: app.description
 logo: app.logo
 version: 0.2.0
 channel: stable
+color: green
 api-level: 1
 author:
   name: DynamicScreen
   email: bonjour@dynamicscreen.com
   note: author.note
 privileges:
-  needs_account:
-    - type: google
-      why: privileges.needs_account.google.why
-    - type: microsoft
-      why: privileges.needs_account.microsoft.why
+  needs_media:
+    - identifier: image-medias
+      type: image
+      why: privileges.needs_media.image.why
 modules:
   - name: modules.image.name
     type: slide
     description: modules.image.description
-    vue:
-      component: src/Image.vue
-      options: src/ImageOptions.vue
-    php:
-      handler: Vendor\DynamicScreenImage\ImageHandler
-    node:
-      handler: src/handler.js
+    options:
+      privileges:
+        needs_media:
+          - image-medias
+        vue:
+          component: src/Image/Image.ts
+          options: src/Image/ImageOptions.ts
+        php:
+          handler: \DynamicScreen\Image\Image\ImageSlideHandler
+        node:
+          handler: src/handler.js
