@@ -5,6 +5,8 @@ namespace DynamicScreen\Image\Image;
 use App\Domain\Module\Model\Module;
 use DynamicScreen\SdkPhp\Handlers\SlideHandler;
 use DynamicScreen\SdkPhp\Interfaces\ISlide;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ImageSlideHandler extends SlideHandler
 {
@@ -43,6 +45,50 @@ class ImageSlideHandler extends SlideHandler
         }
 
         return $options;
+    }
+
+    public function processOptions($options)
+    {
+        /** @var Request $request */
+        $request = app('request');
+        if ($request->has('media')) {
+            $options['media'] = $request->get('media');
+            return $options;
+        }
+
+        if ($request->hasFile('options.image')) {
+//            $options['image'] = $this->getExtension()->uploadFile('image', 'images');
+//            $options['hash'] = $this->generateHash($request->file('options.image')->path());
+            return $options;
+        }
+
+        return $options;
+    }
+
+    public function getAttachedMedias(ISlide $slide)
+    {
+        $media = $slide->getOption('media');
+        return $media === null ? [] : [$media];
+    }
+
+    public function getValidations(Request $request = null)
+    {
+        $media_rules = ['required_if:options.type,media', 'array'];
+
+        $options = $request->get('options');
+//        if ($request && Arr::get($options, 'type') === 'media') {
+//            $media_rules[] = new AreAvailable;
+//        }
+
+        return [
+            'rules' => [
+                'media' => $media_rules,
+                'remote_file_id' => ['required_if:options.type,drive']
+            ],
+            'messages' => [
+                'media.required_if' => __('dynamicscreen.slides-essentials::image.validations.media_required'),
+            ],
+        ];
     }
 
     public function getDefaultOptions(): array
