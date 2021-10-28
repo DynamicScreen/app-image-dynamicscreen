@@ -1,25 +1,31 @@
 {
-    "app": {
-        "name": "Image",
-        "description": "Affiche une ou plusieurs images.",
-        "logo": "fa fa-image",
-        "author": {
-            "name": "DynamicScreen",
-            "email": "bonjour@dynamicscreen.com",
-            "note": "Les grands paysages désertiques font toujours impressionnants."
-        }
-    },
-    "privileges": {
-        "needs_account": {
-            "google": {
-                "why": "Cette authorisation est nécessaire afin d'accéder aux images sur votre drive."
-            }
-        }
-    },
-    "modules": {
-        "image": {
-            "name": "Image",
-            "description": "Affiche une image, tous simplement !"
-        }
+  "app": {
+    "name": "Image",
+    "description": "Affiche une ou plusieurs images.",
+    "logo": "fa fa-image",
+    "author": {
+      "name": "DynamicScreen",
+      "email": "bonjour@dynamicscreen.com",
+      "note": "Les grands paysages désertiques font toujours sensation."
     }
+  },
+  "privileges": {
+    "needs_media": {
+      "image": {
+        "why": "Ce privilège indique qu'une ou plusieurs images sont requises pour l'utilisation."
+      }
+    }
+  },
+  "modules": {
+    "image": {
+      "name": "Image",
+      "description": "Affiche une image.",
+      "options": {
+        "media-picker": {
+          "label": "Image(s) à afficher",
+          "help": "help text"
+        }
+      }
+    }
+  }
 }

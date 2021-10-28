@@ -1,25 +1,31 @@
 {
-    "app": {
-        "name": "Image",
-        "description": "Display an image.",
-        "logo": "fa fa-image",
-        "author": {
-            "name": "DynamicScreen",
-            "email": "bonjour@dynamicscreen.com",
-            "note": "Use wide landscapes as wallpapers."
-        }
-    },
-    "privileges": {
-        "needs_account": {
-            "google": {
-                "why": "This privilege is required to access your drive"
-            }
-        }
-    },
-    "modules": {
-        "image": {
-            "name": "Image",
-            "description": "Display an image, very simple."
-        }
+  "app": {
+    "name": "Image",
+    "description": "Display one or several images.",
+    "logo": "fa fa-image",
+    "author": {
+      "name": "DynamicScreen",
+      "email": "bonjour@dynamicscreen.com",
+      "note": "Use wide landscapes as wallpapers."
     }
+  },
+  "privileges": {
+    "needs_media": {
+      "image": {
+        "why": "This indicates one or several images are required for usage."
+      }
+    }
+  },
+  "modules": {
+    "image": {
+      "name": "Image",
+      "description": "Display an image, very simple.",
+      "options": {
+        "media-picker": {
+          "label": "Image(s) to show",
+          "help": "help text"
+        }
+      }
+    }
+  }
 }
