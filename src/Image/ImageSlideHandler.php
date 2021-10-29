@@ -15,7 +15,7 @@ class ImageSlideHandler extends SlideHandler
         parent::__construct($module);
     }
 
-    public function fetch(ISlide $slide): array
+    public function fetch(ISlide $slide): void
     {
         $mediaAccessKey = $this->needed_medias();
 
@@ -23,14 +23,10 @@ class ImageSlideHandler extends SlideHandler
             $mediaAccessKey = Arr::first($mediaAccessKey);
         }
 
-        $medias = collect($slide->getMedias($mediaAccessKey));
+        $medias = $slide->getMedias($mediaAccessKey);
 
-        if ($medias->isEmpty()) {
-            return [];
-        }
-
-        return collect($medias)->map(function ($media) use ($slide) {
-            return [
+        collect($medias)->map(function ($media) use ($slide) {
+            $this->addSlide([
                 'url' => Arr::get($media, 'url'),
                 'color' => $slide->getOption('color', 'black'),
                 'media_id' => Arr::get($media, 'id'),
@@ -39,8 +35,8 @@ class ImageSlideHandler extends SlideHandler
                 'caption_color' => rescue(function () use ($slide) {
                     return $this->getContrastColor($slide->getOption('color'));
                 }, 'black'),
-            ];
-        })->toArray();
+            ]);
+        });
     }
 
     public function needed_medias()
