@@ -58,7 +58,7 @@ export default class ImageOptionsModule extends SlideModule {
 
     return [
         h(Field, { label: "Image(s) à afficher" }, [
-          h(MediaPicker, { ...update.option('images') })
+          h(MediaPicker, { ...update.option('image-medias') })
         ]),
         h(Field, { label: "Couleur" }, [
           h(ColorPicker, { ...update.option("color") })
