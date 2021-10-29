@@ -27,6 +27,7 @@ export const COLOR_CLASSES = {
   "brown": 'yellow-800', // text-yellow-800 bg-yellow-800 focus:ring-yellow-800 border-yellow-800
   "yellow": 'yellow-500', // text-yellow-500 bg-yellow-500 focus:ring-yellow-500 border-yellow-500
   "gray": 'trueGray-400', // text-trueGray-400 bg-trueGray-400 focus:ring-trueGray-400 border-trueGray-400
+  "black": 'black'
 };
 
 export default class ImageSlideModule extends SlideModule {
@@ -96,6 +97,7 @@ export default class ImageSlideModule extends SlideModule {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
         console.log("SLIDE DATA URL", slide.data.url)
+        await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
     });
