@@ -92,12 +92,9 @@ export default class ImageSlideModule extends SlideModule {
       return COLOR_CLASSES[slide.data.color];
     })
 
-    console.log("BG COLOR", bgColor.value)
-
     context.onPrepare(async () => {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
-        console.log("SLIDE DATA URL", slide.data.url)
         await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
