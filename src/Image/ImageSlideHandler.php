@@ -20,16 +20,16 @@ class ImageSlideHandler extends SlideHandler
         $mediaAccessKey = $this->needed_medias();
 
         if (is_array($mediaAccessKey)) {
-            $mediasAccessKey = Arr::first($mediaAccessKey);
+            $mediaAccessKey = Arr::first($mediaAccessKey);
         }
 
-        $medias = $slide->getOption($mediaAccessKey);
+        $medias = collect($slide->getOption("medias.$mediaAccessKey"));
 
-        if (!$medias) {
+        if ($medias->isEmpty()) {
             return [];
         }
 
-        return $medias->map(function ($media) use ($slide) {
+        return collect($medias)->map(function ($media) use ($slide) {
             return [
                 'media' => $media,
                 'size' => Arr::get($media, 'size'),
@@ -43,7 +43,7 @@ class ImageSlideHandler extends SlideHandler
                     return $this->getContrastColor($slide->getOption('color'));
                 }, 'black'),
             ];
-        });
+        })->toArray();
     }
 
     public function needed_medias()
