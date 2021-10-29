@@ -27,6 +27,7 @@ export const COLOR_CLASSES = {
   "brown": 'yellow-800', // text-yellow-800 bg-yellow-800 focus:ring-yellow-800 border-yellow-800
   "yellow": 'yellow-500', // text-yellow-500 bg-yellow-500 focus:ring-yellow-500 border-yellow-500
   "gray": 'trueGray-400', // text-trueGray-400 bg-trueGray-400 focus:ring-trueGray-400 border-trueGray-400
+  "black": 'black'
 };
 
 export default class ImageSlideModule extends SlideModule {
@@ -39,13 +40,9 @@ export default class ImageSlideModule extends SlideModule {
   };
 
   async onReady() {
-    console.log("ON READY")
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
-      console.log(this.context)
-      console.log(this.context.slide.data)
       await ability.download(this.context.slide.data.url, (assetDownload: AssetDownload) => {
-        console.log("ASSET DOWNLOAD READY", assetDownload)
           assetDownload.onProgress.subscribe((progress, ev) => {
             ev.unsub();
           });
@@ -54,7 +51,6 @@ export default class ImageSlideModule extends SlideModule {
             ev.unsub();
           });
         });
-      console.log("DOWNLOAD FINISHED");
       });
 
     // guard.remove();
@@ -100,6 +96,8 @@ export default class ImageSlideModule extends SlideModule {
     context.onPrepare(async () => {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
+        console.log("SLIDE DATA URL", slide.data.url)
+        await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
     });
