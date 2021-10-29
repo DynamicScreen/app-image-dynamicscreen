@@ -55,11 +55,9 @@ export default class ImageOptionsModule extends SlideModule {
 
     const { Field, TextInput, NumberInput, MediaPicker, ColorPicker } = OptionsContext.components
 
-    return () =>
-      h("div", {}, [
-        // input type: media hidden ??
+    return [
         h(Field, { label: "Image(s) à afficher" }, [
-          h(MediaPicker, { ...update("media") })
+          h(MediaPicker, { ...update("image-medias") })
         ]),
         h(Field, { label: "Couleur" }, [
           h(ColorPicker, { ...update("color") })
@@ -69,7 +67,7 @@ export default class ImageOptionsModule extends SlideModule {
         ]),
         h(Field, { label: "Margin" }, [
           h(NumberInput, { ...update("margin") })
-        ]),
-      ])
+        ])
+      ]
   }
 }
