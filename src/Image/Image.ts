@@ -91,7 +91,9 @@ export default class ImageSlideModule extends SlideModule {
       // @ts-ignore
       return COLOR_CLASSES[slide.data.color];
     })
-    
+
+    console.log("BG COLOR", bgColor.value)
+
     context.onPrepare(async () => {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
