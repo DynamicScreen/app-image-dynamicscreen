@@ -42,6 +42,8 @@ export default class ImageSlideModule extends SlideModule {
     console.log("ON READY")
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
+      console.log(this.context)
+      console.log(this.context.slide.data)
       await ability.download(this.context.slide.data.url, (assetDownload: AssetDownload) => {
         console.log("ASSET DOWNLOAD READY", assetDownload)
           assetDownload.onProgress.subscribe((progress, ev) => {
