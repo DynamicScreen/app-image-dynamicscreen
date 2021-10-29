@@ -58,7 +58,6 @@ export default class ImageOptionsModule extends SlideModule {
     return () =>
       h("div", {}, [
         // input type: media hidden ??
-
         h(Field, { label: "Image(s) à afficher" }, [
           h(MediaPicker, { ...update("media") })
         ]),

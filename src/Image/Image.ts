@@ -58,7 +58,7 @@ export default class ImageSlideModule extends SlideModule {
   };
 
   onMounted() {
-    console.log('SYNCED OU PASsssss')
+    console.log('SYNCED')
   }
 
   onUpdated() {
