@@ -5,11 +5,11 @@ import {
   IGuardsManager,
   ISlideContext,
   IPublicSlide,
-  SlideModule
+  SlideModule,
+  SlideUpdateFunctions
 } from "dynamicscreen-sdk-js"
 
 import i18next from "i18next";
-import {SlideUpdateFunctions} from "../../../../../../../dynamicscreen-sdk-js/src/index";
 
 const en = require("../../languages/en.json");
 const fr = require("../../languages/fr.json");
