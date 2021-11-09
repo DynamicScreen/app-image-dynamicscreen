@@ -86,7 +86,6 @@ export default class ImageSlideModule extends SlideModule {
 
     this.context = context
     const url = ref("");
-    const urlBg = computed(() => 'url(\'' + url.value + '\')')
 
     const bgColor = computed(() => {
       // @ts-ignore
@@ -96,7 +95,6 @@ export default class ImageSlideModule extends SlideModule {
     context.onPrepare(async () => {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         this.initI18n();
-        console.log("SLIDE DATA URL", slide.data.url)
         await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
@@ -123,9 +121,9 @@ export default class ImageSlideModule extends SlideModule {
           class: "slide-content center vertical-center-wrapper flex-column"
         }, [
           h("div", {
-            class: "image-container bg-cover bg-no-repeat bg-center bg-" + bgColor,
+            class: "image-container bg-cover bg-no-repeat bg-center bg-" + bgColor.value,
             style: [
-              { backgroundImage: urlBg.value },
+              { backgroundImage: "url(" + url.value + ")" },
               {width: '100%'}, {height: '100%'},
               {position: 'absolute'},
               {top: 0},
