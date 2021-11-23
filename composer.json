@@ -13,14 +13,8 @@
             "email": "bonjour@dynamicscreen.com"
         }
     ],
-    "require": {},
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./../../../../dynamicscreen/sdk-php",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+  "minimum-stability": "dev",
+    "require": {
+        "dynamicscreen/sdk-php": "dev-main"
+    }
 }
