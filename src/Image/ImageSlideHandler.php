@@ -2,18 +2,12 @@
 
 namespace DynamicScreen\Image\Image;
 
-use App\Domain\Module\Model\Module;
 use DynamicScreen\SdkPhp\Handlers\SlideHandler;
 use DynamicScreen\SdkPhp\Interfaces\ISlide;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ImageSlideHandler extends SlideHandler
 {
-    public function __construct(Module $module)
-    {
-        parent::__construct($module);
-    }
 
     public function fetch(ISlide $slide): void
     {
