@@ -19,6 +19,7 @@ privileges:
 modules:
   - name: modules.image.name
     identifier: image
+    logo: fa fa-image
     color: green
     type: slide
     description: modules.image.description
