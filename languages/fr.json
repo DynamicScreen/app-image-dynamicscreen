@@ -2,7 +2,6 @@
   "app": {
     "name": "Image",
     "description": "Affiche une ou plusieurs images.",
-    "logo": "fa fa-image",
     "author": {
       "name": "DynamicScreen",
       "email": "bonjour@dynamicscreen.com",
