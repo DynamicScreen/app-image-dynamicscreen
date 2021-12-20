@@ -1,74 +1,45 @@
 import {
-  BaseContext,
-  AssetDownload,
-  IAssetsStorageAbility,
-  IGuardsManager,
-  ISlideContext,
-  IPublicSlide,
-  SlideModule,
-  SlideUpdateFunctions
+  ISlideOptionsContext,
+  SlideOptionsModule,
+  VueInstance,
 } from "dynamicscreen-sdk-js"
 
-import i18next from "i18next";
-
-const en = require("../../languages/en.json");
-const fr = require("../../languages/fr.json");
-
-
-
-export default class ImageOptionsModule extends SlideModule {
-  constructor(context: ISlideContext) {
-    super(context);
-  }
-
-  trans(key: string) {
-    return i18next.t(key);
-  };
-
+export default class ImageOptionsModule extends SlideOptionsModule {
   async onReady() {
     return true;
   };
 
   onMounted() {
-    console.log('onMounted app-image OPTIONS')
+    console.log('MOUNTED image options')
   }
 
   onUpdated() {
+    console.log('UPDATED image options')
   }
 
-  initI18n() {
-    i18next.init({
-      fallbackLng: 'en',
-      lng: 'fr',
-      resources: {
-        en: { translation: en },
-        fr: { translation: fr },
-      },
-      debug: true,
-    }, (err, t) => {
-      if (err) return console.log('something went wrong loading translations', err);
-    });
-  };
+  onUnmounted() {
+    console.log('UNMOUNTED image options')
+  }
 
-  // @ts-ignore
-  setup(props, ctx, update: SlideUpdateFunctions, OptionsContext) {
-    const { h } = ctx;
+  setup(props: Record<string, any>, vue: VueInstance, context: ISlideOptionsContext) {
+    const { h } = vue;
 
-    const { Field, TextInput, NumberInput, MediaPicker, ColorPicker } = OptionsContext.components
+    const update = context.update;
+    const { Field, TextInput, NumberInput, MediaPicker, ColorPicker} = context.components;
 
     return () => [
-        h(Field, { label: "Image(s) à afficher" }, [
+        h(Field, { label: this.t('modules.image.options.label') }, [
           h(MediaPicker, { type: 'image', ...update.option('image-medias') })
         ]),
-        h(Field, { label: "Couleur" }, [
+        h(Field, { label: this.t('modules.image.options.color') }, [
           h(ColorPicker, { ...update.option("color") })
         ]),
-        h(Field, { label: "Légende" }, [
+        h(Field, { label: this.t('modules.image.options.caption') }, [
           h(TextInput, { ...update.option("caption") })
         ]),
-        h(Field, { label: "Margin" }, [
+        h(Field, { label: this.t('modules.image.options.margin') }, [
           h(NumberInput, { ...update.option("margin") })
-        ])
+        ]),
       ]
   }
 }

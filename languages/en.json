@@ -21,9 +21,11 @@
       "description": "Display an image, very simple.",
       "options": {
         "media-picker": {
-          "label": "Image(s) to show",
-          "help": "help text"
-        }
+          "label": "Image(s) to display"
+        },
+        "caption": "Caption",
+        "color": "Color",
+        "margin": "Margin"
       }
     }
   }

@@ -1,18 +1,12 @@
 import {
-  BaseContext,
-  AssetDownload,
   IAssetsStorageAbility,
-  IGuardsManager,
   ISlideContext,
   IPublicSlide,
+  IAssetDownload,
   SlideModule
 } from "dynamicscreen-sdk-js"
 
-import { VNode, ComponentPublicInstance, computed } from 'vue';
-import i18next from "i18next";
-
-const en = require("../../languages/en.json");
-const fr = require("../../languages/fr.json");
+import { VNode, computed } from 'vue';
 
 export const COLOR_CLASSES = {
   "green": 'lime-600', // text-lime-600 bg-lime-600 focus:ring-lime-600 border-lime-600
@@ -38,7 +32,7 @@ export default class ImageSlideModule extends SlideModule {
   async onReady() {
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
-      await ability.download(this.context.slide.data.url, (assetDownload: AssetDownload) => {
+      await ability.download(this.context.slide.data.url, (assetDownload: IAssetDownload) => {
           assetDownload.onProgress.subscribe((progress, ev) => {
             ev.unsub();
           });
@@ -62,14 +56,9 @@ export default class ImageSlideModule extends SlideModule {
 
   // @ts-ignore
   setup(props, ctx) {
-    const { h, ref, reactive } = ctx;
-
+    const { h, ref, reactive} = ctx;
     let slide = reactive(props.slide) as IPublicSlide;
     const context = reactive(props.slide.context);
-    const { t } = context.i18n;
-    context.i18n.addResources("en", props.slide.identifier, en);
-    context.i18n.addResources("fr", props.slide.identifier, fr);
-
 
     this.context = context
     const url = ref("");
@@ -84,6 +73,7 @@ export default class ImageSlideModule extends SlideModule {
         await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
+      console.log('on prepare called')
     });
 
     context.onReplay(async () => {
@@ -123,7 +113,7 @@ export default class ImageSlideModule extends SlideModule {
               {textOverflow: 100},
               {overflow: 100},
             ]
-          }, [t('app.description'), '\nhello']),
+          }),
         ]),
       ]),
     ]) as VNode

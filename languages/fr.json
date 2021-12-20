@@ -21,9 +21,11 @@
       "description": "Affiche une image.",
       "options": {
         "media-picker": {
-          "label": "Image(s) à afficher",
-          "help": "help text"
-        }
+          "label": "Image(s) à afficher"
+        },
+        "caption": "Légende",
+        "color": "Couleur",
+        "margin": "Bordure"
       }
     }
   }
