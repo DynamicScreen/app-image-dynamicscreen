@@ -33,11 +33,6 @@ class ImageSlideHandler extends SlideHandler
         });
     }
 
-    public function needed_medias()
-    {
-        return $this->module->getOption('privileges.needs_media', false);
-    }
-
     function getContrastColor($hexColor)
     {
 

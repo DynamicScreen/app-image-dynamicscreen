@@ -35,10 +35,6 @@ export default class ImageSlideModule extends SlideModule {
     super(context);
   }
 
-  trans(key: string) {
-    return i18next.t(key);
-  };
-
   async onReady() {
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
@@ -64,25 +60,16 @@ export default class ImageSlideModule extends SlideModule {
   onUpdated() {
   }
 
-  initI18n() {
-    i18next.init({
-      fallbackLng: 'en',
-      lng: 'fr',
-      resources: {
-        en: { translation: en },
-        fr: { translation: fr },
-      },
-      debug: true,
-    }, (err, t) => {
-      if (err) return console.log('something went wrong loading translations', err);
-    });
-  };
-
   // @ts-ignore
   setup(props, ctx) {
-    const { h, ref, reactive} = ctx;
+    const { h, ref, reactive } = ctx;
+
     let slide = reactive(props.slide) as IPublicSlide;
     const context = reactive(props.slide.context);
+    const { t } = context.i18n;
+    context.i18n.addResources("en", props.slide.identifier, en);
+    context.i18n.addResources("fr", props.slide.identifier, fr);
+
 
     this.context = context
     const url = ref("");
@@ -94,7 +81,6 @@ export default class ImageSlideModule extends SlideModule {
 
     context.onPrepare(async () => {
       await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
-        this.initI18n();
         await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
@@ -130,6 +116,14 @@ export default class ImageSlideModule extends SlideModule {
               {left: 0},
             ]
           }),
+          h("div", {
+            style: [
+              {width: '100%'}, {height: '100%'},
+              {position: 'absolute'},
+              {textOverflow: 100},
+              {overflow: 100},
+            ]
+          }, [t('app.description'), '\nhello']),
         ]),
       ]),
     ]) as VNode
