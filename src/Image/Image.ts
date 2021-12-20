@@ -3,10 +3,10 @@ import {
   ISlideContext,
   IPublicSlide,
   IAssetDownload,
-  SlideModule
+  SlideModule, VueInstance, ISlideOptionsContext
 } from "dynamicscreen-sdk-js"
 
-import { VNode, computed } from 'vue';
+import { computed } from 'vue';
 
 export const COLOR_CLASSES = {
   "green": 'lime-600', // text-lime-600 bg-lime-600 focus:ring-lime-600 border-lime-600
@@ -55,12 +55,10 @@ export default class ImageSlideModule extends SlideModule {
   }
 
   // @ts-ignore
-  setup(props, ctx) {
-    const { h, ref, reactive} = ctx;
-    let slide = reactive(props.slide) as IPublicSlide;
-    const context = reactive(props.slide.context);
+  setup(props: Record<string, any>, vue: VueInstance, context: ISlideContext) {
+    const { h, ref, reactive } = vue;
+    let slide = reactive(this.context.slide) as IPublicSlide;
 
-    this.context = context
     const url = ref("");
 
     const bgColor = computed(() => {
@@ -68,25 +66,25 @@ export default class ImageSlideModule extends SlideModule {
       return COLOR_CLASSES[slide.data.color];
     })
 
-    context.onPrepare(async () => {
-      await context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
+    this.context.onPrepare(async () => {
+      await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
         await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
       console.log('on prepare called')
     });
 
-    context.onReplay(async () => {
+    this.context.onReplay(async () => {
     });
 
-    context.onPlay(async () => {
+    this.context.onPlay(async () => {
     });
 
     // context.onPause(async () => {
     //   console.log('Image: onPause')
     // });
 
-    context.onEnded(async () => {
+    this.context.onEnded(async () => {
     });
 
     return () => h("div", {
@@ -116,6 +114,6 @@ export default class ImageSlideModule extends SlideModule {
           }),
         ]),
       ]),
-    ]) as VNode
+    ])
   }
 }
