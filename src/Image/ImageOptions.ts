@@ -9,18 +9,6 @@ export default class ImageOptionsModule extends SlideOptionsModule {
     return true;
   };
 
-  onMounted() {
-    console.log('MOUNTED image options')
-  }
-
-  onUpdated() {
-    console.log('UPDATED image options')
-  }
-
-  onUnmounted() {
-    console.log('UNMOUNTED image options')
-  }
-
   setup(props: Record<string, any>, vue: VueInstance, context: ISlideOptionsContext) {
     const { h } = vue;
 
@@ -28,7 +16,7 @@ export default class ImageOptionsModule extends SlideOptionsModule {
     const { Field, TextInput, NumberInput, MediaPicker, ColorPicker} = context.components;
 
     return () => [
-        h(Field, { label: this.t('modules.image.options.label') }, [
+        h(Field, { label: this.t('modules.image.options.media-picker.label') }, [
           h(MediaPicker, { type: 'image', ...update.option('image-medias') })
         ]),
         h(Field, { label: this.t('modules.image.options.color') }, [

@@ -3,10 +3,8 @@ import {
   ISlideContext,
   IPublicSlide,
   IAssetDownload,
-  SlideModule, VueInstance, ISlideOptionsContext
+  SlideModule, VueInstance
 } from "dynamicscreen-sdk-js"
-
-import { computed } from 'vue';
 
 export const COLOR_CLASSES = {
   "green": 'lime-600', // text-lime-600 bg-lime-600 focus:ring-lime-600 border-lime-600
@@ -47,16 +45,8 @@ export default class ImageSlideModule extends SlideModule {
     return true;
   };
 
-  onMounted() {
-    console.log('SYNCED')
-  }
-
-  onUpdated() {
-  }
-
-  // @ts-ignore
   setup(props: Record<string, any>, vue: VueInstance, context: ISlideContext) {
-    const { h, ref, reactive } = vue;
+    const { h, ref, reactive, computed } = vue;
     let slide = reactive(this.context.slide) as IPublicSlide;
 
     const url = ref("");
@@ -72,19 +62,6 @@ export default class ImageSlideModule extends SlideModule {
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
       console.log('on prepare called')
-    });
-
-    this.context.onReplay(async () => {
-    });
-
-    this.context.onPlay(async () => {
-    });
-
-    // context.onPause(async () => {
-    //   console.log('Image: onPause')
-    // });
-
-    this.context.onEnded(async () => {
     });
 
     return () => h("div", {
