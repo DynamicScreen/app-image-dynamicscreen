@@ -12,9 +12,5 @@
             "name": "DynamicScreen",
             "email": "bonjour@dynamicscreen.com"
         }
-    ],
-  "minimum-stability": "dev",
-    "require": {
-        "dynamicscreen/sdk-php": "dev-main"
-    }
+    ]
 }
