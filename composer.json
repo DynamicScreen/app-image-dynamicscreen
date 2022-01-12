@@ -1,7 +1,4 @@
 {
-    "name": "dynamicscreen/app-image",
-    "description": "Image app for DynamicScreen SaaS",
-    "license": "MIT",
     "autoload": {
         "psr-4": {
             "DynamicScreen\\Image\\": "src/"

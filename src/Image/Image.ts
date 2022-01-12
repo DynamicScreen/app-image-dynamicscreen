@@ -23,10 +23,6 @@ export const COLOR_CLASSES = {
 };
 
 export default class ImageSlideModule extends SlideModule {
-  constructor(context: ISlideContext) {
-    super(context);
-  }
-
   async onReady() {
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
@@ -35,7 +31,6 @@ export default class ImageSlideModule extends SlideModule {
             ev.unsub();
           });
           assetDownload.onCompleted.subscribe((asset, ev) => {
-            console.log('media: ', asset);
             ev.unsub();
           });
         });
@@ -58,10 +53,8 @@ export default class ImageSlideModule extends SlideModule {
 
     this.context.onPrepare(async () => {
       await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
-        await ability.getDisplayableAsset(slide.data.url).then((asset) => console.log("DISPLAYABLE ASSET",asset.displayableUrl()))
         url.value = await ability.getDisplayableAsset(slide.data.url).then((asset) => asset.displayableUrl());
       });
-      console.log('on prepare called')
     });
 
     return () => h("div", {

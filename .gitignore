@@ -3,3 +3,4 @@ node_modules
 dist/
 vendor/
 *.webpack.config.js
+yarn-error.log
