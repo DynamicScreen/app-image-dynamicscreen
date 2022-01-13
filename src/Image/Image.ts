@@ -26,14 +26,14 @@ export default class ImageSlideModule extends SlideModule {
   async onReady() {
     // const guard = this.context.guardManager.add('ready', this.context.slide.id);
     await this.context.assetsStorage().then(async (ability: IAssetsStorageAbility) => {
-      await ability.download(this.context.slide.data.url, (assetDownload: IAssetDownload) => {
+      await ability.download(this.context.slide.data.url, { callback: (assetDownload: IAssetDownload) => {
           assetDownload.onProgress.subscribe((progress, ev) => {
             ev.unsub();
           });
           assetDownload.onCompleted.subscribe((asset, ev) => {
             ev.unsub();
           });
-        });
+        }, noRetry: false });
       });
 
     // guard.remove();
